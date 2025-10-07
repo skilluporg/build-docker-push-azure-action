@@ -24,7 +24,9 @@ runs:
 
       - name: Login to ACR
         shell: bash
-        run: az acr login --name {{ inputs.registry }}
+        run: |
+          echo "registry: {{ inputs.registry }}"
+          az acr login --name "{{ inputs.registry }}"
 
       - name: Build and push
         uses: docker/build-push-action@v5
