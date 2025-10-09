@@ -34,7 +34,6 @@ runs:
       - name: Login to ACR
         shell: bash
         run: |
-          echo "registry: ${{ inputs.registry }}"
           az acr login --name "${{ inputs.registry }}"
 
       - name: Build and push
@@ -45,6 +44,6 @@ runs:
           tags: ${{ inputs.registry }}.azurecr.io/${{ inputs.repo }}:${{ inputs.version_tag }}
           file: ${{ inputs.dockerfile }}
           build-args: ${{ inputs.build_args }}
-          cache-from: type=registry,ref=${{ inputs.registry }}.azurecr.io/${{ inputs.repo }}:buildcache
-          cache-to: type=registry,ref=${{ inputs.registry }}.azurecr.io/${{ inputs.repo }}:buildcache,mode=max
+          # cache-from: type=registry,ref=${{ inputs.registry }}.azurecr.io/${{ inputs.repo }}:buildcache
+          # cache-to: type=registry,ref=${{ inputs.registry }}.azurecr.io/${{ inputs.repo }}:buildcache,mode=max
           provenance: false
